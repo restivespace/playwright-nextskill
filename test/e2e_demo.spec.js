@@ -41,10 +41,27 @@ test.describe('Saucedemo login & purchase flow', () => {
     });
 
     // 5. checkout and verify purchase success
-    await test.step('Checkout and verify order completion', async () => {
-      await checkoutPage.proceedToCheckout('Muhammad', 'Tester', '12345');
+    // await test.step('Checkout and verify order completion', async () => {
+    //   await checkoutPage.proceedToCheckout('Muhammad', 'Tester', '12345');
+    //   await checkoutPage.finishOrder();
+    //   await checkoutPage.expectOrderComplete();
+    // });
+    // 5. checkout and verify purchase success
+    await test.step('Checkout validation and successful order', async () => {
+      // already on cart page here
+      await checkoutPage.goToCheckout();
+
+      // 🔹 click continue with empty fields → expect error
+      await checkoutPage.clickContinue();
+      await checkoutPage.expectMissingInfoError();
+
+      // 🔹 now fill the required fields correctly and continue
+      await checkoutPage.fillCheckoutInformation('Muhammad', 'Tester', '12345');
+
+      // finish and verify success page
       await checkoutPage.finishOrder();
       await checkoutPage.expectOrderComplete();
     });
+
   });
 });

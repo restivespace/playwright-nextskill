@@ -9,6 +9,9 @@ const checkoutLocators = {
 
   finishButton: '[data-test="finish"]',
   orderCompleteHeader: '[data-test="complete-header"]',
+
+  // 🔹 new
+  errorMessage: '[data-test="error"]',
 };
 
 module.exports = { checkoutLocators };
